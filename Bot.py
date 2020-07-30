@@ -67,11 +67,12 @@ async def admin(ctx):
 async def settings(ctx):
     await ctx.send('```•••••••••••••••••••Settings••••••••••••••••••```')
     await ctx.send('```PING /ping - shows the latency of the bot```')
-
+  
 @client.command()
-async def say(ctx, *, msg):
+async def say(ctx, *, msg, amount=1):
+    await ctx.channel.purge(limit=1)
     await ctx.send(msg)
-    
+ 
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency * 100)}ms')
