@@ -4,6 +4,7 @@ from discord.ext import commands, tasks
 from itertools import cycle
 
 client = commands.Bot(command_prefix = "/")
+client.remove_command('help')
 status = cycle(['Make a thing','Study coding'])
 
 
@@ -37,6 +38,36 @@ async def change_status():
 
 
 #commands
+@client.command(aliases=["Help"])
+async def help(ctx):
+    embed = discord.Embed(title="Miscellaneous", description="Misc Commands", colour=discord.Colour.orange())
+    
+    embed.add_field(name="Miscellanious", value="/misc For the list of the miscellanious commands!")
+    embed.add_field(name="Administrator", value="/admin For the list of the admin commands!")
+    embed.add_field(name="Settings", value="/settings For the list of the settings commands!")
+    
+    
+    await ctx.send(embed=embed)
+    
+@client.command(aliases=['Misc'])
+async def misc(ctx):
+    await ctx.send('```••••••••••••••••Miscellanious•••••••••••••••```')
+    await ctx.send('```HELP /help - Shows this Message!```')
+    await ctx.send('```SAY /say - Says that you typed!```')
+    
+@client.command(aliases=['Admin'])
+async def admin(ctx):
+    await ctx.send('```••••••••••••••••Administration•••••••••••••••```')
+    await ctx.send('```CLEAR /clear - clears the messages that was typed before```')
+    await ctx.send('```KICK /kick - Kicks the mentioned user from the server```')
+    await ctx.send('```BAN ADD /ban add - bans the mentioned user from the server```')
+    await ctx.send('```BAN DEL /ban del - unbans the user that was mentioned```')
+    
+@client.command(aliases=['Settings'])
+async def settings(ctx):
+    await ctx.send('```•••••••••••••••••••Settings••••••••••••••••••```')
+    await ctx.send('```PING /ping - shows the latency of the bot```')
+
 @client.command()
 async def say(ctx, *, msg):
     await ctx.send(msg)
@@ -56,13 +87,13 @@ async def kick(ctx, member : discord.Member, *, reason='Misbehavior'):
     await member.kick(reason=reason)
     await ctx.send(f'Kicked {member.mention}')
     
-@client.command()
+@client.command(aliases=['ban add'])
 @commands.has_permissions(administrator=True)
 async def ban_add(ctx, member : discord.Member, *, reason='Misbehavior'):
     await member.ban(reason=reason)
     await ctx.send(f'Banned {member.mention}')
     
-@client.command()
+@client.command(aliases=['ban del'])
 @commands.has_permissions(administrator=True)
 async def ban_del(ctx, *, member):
     banned_users = await ctx.guild.bans()
