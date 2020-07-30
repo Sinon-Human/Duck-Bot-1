@@ -37,6 +37,11 @@ async def change_status():
 
 
 #commands
+
+@bot.command()
+async def say(ctx, *, msg):
+    await ctx.send(msg)
+    
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency * 100)}ms')
