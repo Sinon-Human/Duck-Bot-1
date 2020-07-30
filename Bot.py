@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands, tasks
 from itertools import cycle
 
-client = commands.Bot(command_prefix = get_prefix)
+client = commands.Bot(command_prefix = "/")
 status = cycle(['Make a thing','Study coding'])
 
 
