@@ -1,4 +1,4 @@
-import discord
+Dimport discord
 import os
 from discord.ext import commands, tasks
 from itertools import cycle
@@ -38,7 +38,7 @@ async def change_status():
 
 #commands
 
-@bot.command()
+@client.command()
 async def say(ctx, *, msg):
     await ctx.send(msg)
     
