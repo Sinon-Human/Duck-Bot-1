@@ -72,4 +72,4 @@ async def ban_del(ctx, *, member):
             await ctx.send(f'Unbanned {user.mention}')
             return
             
-client.run(os.getenv( Token ))
+client.run(os.getenv('Token'))
