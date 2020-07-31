@@ -57,7 +57,7 @@ async def misc(ctx):
     
 @client.command(aliases=['Admin'])
 async def admin(ctx):
-    await ctx.send('```••••••••••••••••Administration•••••••••••••••```')
+    await ctx.send('```••••••••••••••••Administration••••••••••••••```')
     await ctx.send('```CLEAR /clear - clears the messages that was typed before```')
     await ctx.send('```KICK /kick - Kicks the mentioned user from the server```')
     await ctx.send('```BAN ADD /ban add - bans the mentioned user from the server```')
