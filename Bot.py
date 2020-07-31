@@ -5,7 +5,7 @@ from itertools import cycle
 
 client = commands.Bot(command_prefix = "/")
 client.remove_command('help')
-status = cycle(['Make a thing','Study coding'])
+status = cycle(['/help! | QUACK!','QUACK QUACK | I am a DUCK!','STILL FIXING THINGS! | QUACK'])
 
 
 
