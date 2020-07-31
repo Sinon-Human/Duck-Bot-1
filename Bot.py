@@ -38,33 +38,32 @@ async def change_status():
 
 
 #commands
-@client.command(aliases=["Help"])
-async def help(ctx):
+@client.group(name="help", invoke_without_command=True, aliases=["Help", "HELP"])
+async def helpcmd(ctx):
     embed = discord.Embed(title="**BOT COMMANDS!**", description="**LIST OF COMMANDS FROM THE BOT**", colour=discord.Colour.orange())
     
-    embed.add_field(name="Miscellanious", value="/misc For the list of the miscellanious commands!")
-    embed.add_field(name="Administrator", value="/admin For the list of the admin commands!")
-    embed.add_field(name="Settings", value="/settings For the list of the settings commands!")
+    embed.add_field(name="Miscellanious", value="/help misc For the list of the miscellanious commands!")
+    embed.add_field(name="Administrator", value="/help admin For the list of the admin commands!")
+    embed.add_field(name="Settings", value="/help settings For the list of the settings commands!")
     
     
     await ctx.send(embed=embed)
     
-@client.command(aliases=['Misc'])
-async def misc(ctx):
+@helpcmd.command(name='misc', aliases=['Misc', 'MISC'])
+async def misc_cmd(ctx):
     await ctx.send('```••••••••••••••••Miscellanious•••••••••••••••```')
     await ctx.send('```HELP /help - Shows this Message!```')
     await ctx.send('```SAY /say - Says that you typed!```')
     
-@client.command(aliases=['Admin'])
-async def admin(ctx):
+@helpcmd.command(name='admin',aliases=['Admin', 'ADMIN'])
+async def admincmd(ctx):
     await ctx.send('```••••••••••••••••Administration••••••••••••••```')
     await ctx.send('```CLEAR /clear - clears the messages that was typed before```')
     await ctx.send('```KICK /kick - Kicks the mentioned user from the server```')
-    await ctx.send('```BAN ADD /ban add - bans the mentioned user from the server```')
-    await ctx.send('```BAN DEL /ban del - unbans the user that was mentioned```')
+    await ctx.send('```BAN /ban - List of available ban command!```')
     
-@client.command(aliases=['Settings'])
-async def settings(ctx):
+@helpcmd.command(name='settings', aliases=['Settings', 'SETTINGS', 'setting', 'Setting', 'SETTING'])
+async def settingscmd(ctx):
     await ctx.send('```••••••••••••••••••Settings••••••••••••••••••```')
     await ctx.send('```PING /ping - shows the latency of the bot```')
   
@@ -75,7 +74,7 @@ async def say(ctx, *, msg):
  
 @client.command()
 async def ping(ctx):
-    await ctx.send(f'Pong! {round(client.latency * 100)}ms')
+    await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
     
 @client.command()
 @commands.has_permissions(manage_messages=True)
@@ -88,13 +87,19 @@ async def kick(ctx, member : discord.Member, *, reason='Misbehavior'):
     await member.kick(reason=reason)
     await ctx.send(f'Kicked {member.mention}')
     
-@client.command(aliases=['ban add'])
+@client.group(name='ban', invoke_without_command=True, aliases=['Ban', 'BAN'], )
+async def bancmds(ctx):
+    await ctx.send('```••••••••••••••••Ban|Commands••••••••••••••••```')
+    await ctx.send('```BAN ADD /ban add - Command will ban a mantioned user!```')
+    await ctx.send('```BAN DEL /ban del - Command will unban a mantioned user!```')
+    
+@bancmds.command(name='ban add', aliases=['Ban add', 'Ban Add', 'BAN ADD'])
 @commands.has_permissions(administrator=True)
 async def ban_add(ctx, member : discord.Member, *, reason='Misbehavior'):
     await member.ban(reason=reason)
     await ctx.send(f'Banned {member.mention}')
     
-@client.command(aliases=['ban del'])
+@bancmds.command(name='ban del', aliases=['Ban del', 'Ban Del', 'BAN DEL'])
 @commands.has_permissions(administrator=True)
 async def ban_del(ctx, *, member):
     banned_users = await ctx.guild.bans()
@@ -107,5 +112,5 @@ async def ban_del(ctx, *, member):
             await ctx.guild.unban(user)
             await ctx.send(f'Unbanned {user.mention}')
             return
-            
+
 client.run(os.getenv('Token'))
