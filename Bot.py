@@ -42,9 +42,9 @@ async def change_status():
 async def helpcmd(ctx):
     embed = discord.Embed(title="**BOT COMMANDS!**", description="**LIST OF COMMANDS FROM THE BOT**", colour=discord.Colour.orange())
     
-    embed.add_field(name="Miscellanious", value="/help misc For the list of the miscellanious commands!")
-    embed.add_field(name="Administrator", value="/help admin For the list of the admin commands!")
-    embed.add_field(name="Settings", value="/help settings For the list of the settings commands!")
+    embed.add_field(name="Miscellanious", value="/misc For the list of the miscellanious commands!")
+    embed.add_field(name="Administrator", value="/admin For the list of the admin commands!")
+    embed.add_field(name="Settings", value="/settings For the list of the settings commands!")
     
     
     await ctx.send(embed=embed)
@@ -89,17 +89,17 @@ async def kick(ctx, member : discord.Member, *, reason='Misbehavior'):
     
 @client.group(name='ban', invoke_without_command=True, aliases=['Ban', 'BAN'], )
 async def bancmds(ctx):
-    await ctx.send('```••••••••••••••••Ban|Commands••••••••••••••••```')
+    await ctx.send('```•••••••••••••••••Ban|Commands•••••••••••••••```')
     await ctx.send('```BAN ADD /ban add - Command will ban a mantioned user!```')
     await ctx.send('```BAN DEL /ban del - Command will unban a mantioned user!```')
     
-@bancmds.command(name='ban add', aliases=['Ban add', 'Ban Add', 'BAN ADD'])
+@bancmds.command(name='add', aliases=['Add'])
 @commands.has_permissions(administrator=True)
 async def ban_add(ctx, member : discord.Member, *, reason='Misbehavior'):
     await member.ban(reason=reason)
     await ctx.send(f'Banned {member.mention}')
     
-@bancmds.command(name='ban del', aliases=['Ban del', 'Ban Del', 'BAN DEL'])
+@bancmds.command(name='del', aliases=['Del'])
 @commands.has_permissions(administrator=True)
 async def ban_del(ctx, *, member):
     banned_users = await ctx.guild.bans()
