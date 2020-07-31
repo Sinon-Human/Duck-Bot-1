@@ -98,7 +98,7 @@ async def ban_add(ctx, member : discord.Member, *, reason='Misbehavior'):
 @commands.has_permissions(administrator=True)
 async def ban_del(ctx, *, member):
     banned_users = await ctx.guild.bans()
-    mamber_name, member_discrikinator = member.split('#')
+    mamber_name, member_discriminator = member.split('#')
     
     for banned_entry in banned_users:
         user = banned_entry.user
