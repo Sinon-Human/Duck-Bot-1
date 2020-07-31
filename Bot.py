@@ -40,7 +40,7 @@ async def change_status():
 #commands
 @client.command(aliases=["Help"])
 async def help(ctx):
-    embed = discord.Embed(title="Miscellaneous", description="Misc Commands", colour=discord.Colour.orange())
+    embed = discord.Embed(title="**BOT COMMANDS!**", description="**LIST OF COMMANDS FROM THE BOT**", colour=discord.Colour.orange())
     
     embed.add_field(name="Miscellanious", value="/misc For the list of the miscellanious commands!")
     embed.add_field(name="Administrator", value="/admin For the list of the admin commands!")
