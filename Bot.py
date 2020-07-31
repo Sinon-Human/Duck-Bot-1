@@ -26,7 +26,7 @@ async def on_command_error(ctx, error):
         await ctx.send('Quack! Quack! Your Command Is Not Found!')
        
 
-@tasks.loop(seconds=5)
+@tasks.loop(seconds=10)
 async def change_status():
     await client.change_presence(activity=discord.Game(next(status)))
 
@@ -65,12 +65,12 @@ async def admin(ctx):
     
 @client.command(aliases=['Settings'])
 async def settings(ctx):
-    await ctx.send('```•••••••••••••••••••Settings••••••••••••••••••```')
+    await ctx.send('```••••••••••••••••••Settings••••••••••••••••••```')
     await ctx.send('```PING /ping - shows the latency of the bot```')
   
 @client.command()
 async def say(ctx, *, msg, amount=1):
-    await ctx.channel.purge(limit=1)
+    await ctx.channel.purge(limit=amount)
     await ctx.send(msg)
  
 @client.command()
